@@ -1,50 +1,41 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
-import Dashboard from "./scenes/dashboard";
-import Team from "./scenes/team";
-import Invoices from "./scenes/invoices";
-import Contacts from "./scenes/contacts";
-import Bar from "./scenes/bar";
-import Form from "./scenes/form";
-import Line from "./scenes/line";
-import Pie from "./scenes/pie";
-import FAQ from "./scenes/faq";
-import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-import Calendar from "./scenes/calendar/calendar";
+import { PersistGate } from "redux-persist/lib/integration/react";
+import { getPersistor } from "@rematch/persist";
+import { Provider } from "react-redux";
+import { ConnectedRouter } from "connected-react-router";
+
+import store, { history } from "./redux/store";
+import BasicLayout from "./components/BasicLayout";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
+  const persistor = getPersistor();
 
   return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="app">
-          <Sidebar isSidebar={isSidebar} />
-          <main className="content">
-            <Topbar setIsSidebar={setIsSidebar} />
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/contacts" element={<Contacts />} />
-              <Route path="/invoices" element={<Invoices />} />
-              <Route path="/form" element={<Form />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/geography" element={<Geography />} />
-            </Routes>
-          </main>
-        </div>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+    <PersistGate persistor={persistor}>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <div className="app">
+                <Sidebar isSidebar={isSidebar} />
+                <main className="content">
+                  <Topbar setIsSidebar={setIsSidebar} />
+                  <Route path="/" component={BasicLayout} />
+                </main>
+              </div>
+            </ThemeProvider>
+          </ColorModeContext.Provider>
+        </ConnectedRouter>
+      </Provider>
+    </PersistGate>
   );
 }
 
