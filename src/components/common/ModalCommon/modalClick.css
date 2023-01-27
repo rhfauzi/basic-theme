@@ -1,0 +1,62 @@
+.ant-modal-header {
+  border: 0 solid #fff;
+}
+
+.click-modal-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 10px 20px;
+}
+
+.click-modal-title {
+  font-size: 24px;
+  margin: 5px 20px 0;
+  line-height: 28px;
+  font-weight: 400;
+  text-align: center;
+  color: #333333;
+}
+
+.click-modal-image {
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.ant-modal-error-message {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  color: #780000;
+  margin-top: 5px;
+  margin-bottom: 0;
+  text-transform: none;
+}
+
+.ant-modal-error-description {
+  margin-top: 5px;
+  font-size: 15px;
+  line-height: 25px;
+  font-weight: 400;
+  text-align: center;
+  color: #666666;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-transform: none;
+  white-space: pre-wrap;
+}
+
+.MuiDialog-paperScrollPaper {
+  background-color: transparent !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+#buttonOK {
+  width: 100%;
+  color: white;
+  height: 45px;
+}

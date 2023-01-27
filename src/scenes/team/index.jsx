@@ -1,15 +1,33 @@
+import React, { useEffect, useState } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { tokens } from "../../theme";
-import { mockDataTeam } from "../../data/mockData";
+import { Button } from "antd";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
+import { useDispatch, useSelector } from "react-redux";
+
+import { tokens } from "../../theme";
+import { mockDataTeam } from "../../data/mockData";
 import Header from "../../components/Header";
+import ModalCommon from "../../components/common/ModalCommon";
 
 const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [modalData, setModalData] = useState({
+    isModalOpen: false,
+    errorCode: "CLICKS 0020",
+    errorTitle: "error.title.general.network",
+    errorMessage: "error.message.general.network",
+    mainButton: {
+      title: "OK",
+    },
+    secondaryButton: null,
+    sourceSystem: "",
+    image: "error",
+  });
+
   const columns = [
     { field: "id", headerName: "ID" },
     {
@@ -68,9 +86,29 @@ const Team = () => {
     },
   ];
 
+  const dataInfo = useSelector((state) => state.dataInfo);
+  console.log("dataInfo", dataInfo);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    try {
+      dispatch.dataInfo.getManageTeams({});
+    } catch (error) {
+      console.log("1111111111111111111 error", error);
+    }
+  }, [dispatch.dataInfo]);
+
   return (
     <Box m="20px">
       <Header title="TEAM" subtitle="Managing the Team Members" />
+
+      <Button
+        type="primary"
+        onClick={() => setModalData({ ...modalData, isModalOpen: true })}
+      >
+        Open Modal
+      </Button>
+
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -102,6 +140,24 @@ const Team = () => {
       >
         <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} />
       </Box>
+
+      <ModalCommon
+        title={modalData.errorTitle}
+        errorMessage={
+          modalData.sourceSystem
+            ? `${modalData.sourceSystem} : ${modalData.errorCode}`
+            : modalData.errorCode ?? ""
+        }
+        description={modalData.errorMessage}
+        image={modalData.image}
+        isModalOpen={modalData.isModalOpen}
+        mainButton={{
+          title: modalData.title,
+          onClick: () => setModalData({ ...modalData, isModalOpen: false }),
+        }}
+        secondaryButton={modalData.secondaryButton}
+        handleCancel={() => setModalData({ ...modalData, isModalOpen: false })}
+      />
     </Box>
   );
 };

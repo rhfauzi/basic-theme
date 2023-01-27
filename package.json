@@ -20,11 +20,18 @@
     "@nivo/line": "^0.79.1",
     "@nivo/pie": "^0.80.0",
     "@reduxjs/toolkit": "^1.8.5",
+    "@rematch/core": "^2.2.0",
+    "@rematch/persist": "^2.1.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^5.1.6",
+    "axios": "^1.2.3",
     "chart.js": "^3.9.1",
+    "connected-react-router": "^6.9.3",
+    "crypto-js": "^4.1.1",
     "formik": "^2.2.9",
+    "history": "^5.3.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^4.3.1",
     "react-dom": "^18.2.0",
@@ -33,14 +40,19 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
+    "redux-persist": "^6.0.0",
+    "secure-web-storage": "^1.0.2",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "env-cmd -f .env.local react-scripts start",
+    "build": "env-cmd -f .env.local react-scripts build",
+    "test": "env-cmd -f .env.local react-scripts test",
+    "eject": "env-cmd -f .env.local react-scripts eject"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
   },
   "eslintConfig": {
     "extends": [

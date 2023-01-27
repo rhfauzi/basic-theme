@@ -1,13 +1,24 @@
+import React, { useEffect } from "react";
 import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { useTheme } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+
 import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
-import { useTheme } from "@mui/material";
 
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const bannerData = useSelector((state) => state.banner.bannerData);
+  console.log("bannerData", bannerData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch.banner.getBanner({});
+  }, [dispatch]);
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
