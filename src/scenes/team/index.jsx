@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "antd";
@@ -11,15 +11,17 @@ import { tokens } from "../../theme";
 import { mockDataTeam } from "../../data/mockData";
 import Header from "../../components/Header";
 import ModalCommon from "../../components/common/ModalCommon";
+import General from "../../components/common/Utils/General";
+console.log("General", General);
 
 const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [modalData, setModalData] = useState({
     isModalOpen: false,
-    errorCode: "CLICKS 0020",
-    errorTitle: "error.title.general.network",
-    errorMessage: "error.message.general.network",
+    errorCode: General.error.code.ERROR_CODE_GENERAL_NETWORK,
+    errorTitle: General.error.title.ERROR_CODE_GENERAL_NETWORK,
+    errorMessage: General.error.mesage.ERROR_CODE_GENERAL_NETWORK,
     mainButton: {
       title: "OK",
     },
@@ -91,12 +93,47 @@ const Team = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    try {
-      dispatch.dataInfo.getManageTeams({});
-    } catch (error) {
-      console.log("1111111111111111111 error", error);
-    }
+    dispatch.dataInfo.getManageTeams({});
   }, [dispatch.dataInfo]);
+
+  useEffect(() => {
+    if (!dataInfo.error) return;
+    const error = dataInfo.error;
+    setModalData({
+      ...modalData,
+      isModalOpen: true,
+      errorCode: error.code,
+      secondaryButton: {
+        title: "Try Again",
+        onClick: closeModalBackTo(),
+      },
+    });
+  }, [dataInfo.error]);
+
+  const closeModalBackTo = useCallback(
+    (type, exact = false) =>
+      () => {
+        setModalData({
+          ...modalData,
+          isModalOpen: false,
+        });
+
+        switch (type) {
+          case "login":
+            setTimeout(() => {
+              window.location = "/login";
+            }, 500);
+            break;
+
+          default:
+            window.location.reload();
+            break;
+        }
+      },
+    [modalData]
+  );
+
+  console.log("modalData", modalData);
 
   return (
     <Box m="20px">
@@ -153,7 +190,8 @@ const Team = () => {
         isModalOpen={modalData.isModalOpen}
         mainButton={{
           title: modalData.title,
-          onClick: () => setModalData({ ...modalData, isModalOpen: false }),
+          // onClick: () => setModalData({ ...modalData, isModalOpen: false }),
+          onClick: () => closeModalBackTo({ ...modalData, isModalOpen: false }),
         }}
         secondaryButton={modalData.secondaryButton}
         handleCancel={() => setModalData({ ...modalData, isModalOpen: false })}

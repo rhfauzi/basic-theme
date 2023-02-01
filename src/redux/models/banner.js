@@ -12,7 +12,7 @@ export default {
     getBanner_Succeed(state, payload) {
       return { ...state, bannerData: payload, fetching: false, fetched: true };
     },
-    getBanner_Request(state, payload) {
+    getBanner_Request(state) {
       return { ...state, fetching: true };
     },
     getBanner_Failed(state, payload) {

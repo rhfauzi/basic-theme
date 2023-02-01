@@ -1,0 +1,14 @@
+{
+  "error": {
+    "title": {
+      "ERROR_CODE_GENERAL_NETWORK": "Connection time-out, unable to load data",
+      "ERROR_CODE_GENERAL_NOT_PROCESSED": "Your request cannot be processed"
+    },
+    "code": {
+      "ERROR_CODE_GENERAL_NETWORK": "CLICKS : 0020"
+    },
+    "mesage": {
+      "ERROR_CODE_GENERAL_NETWORK": "Please check your network connection"
+    }
+  }
+}

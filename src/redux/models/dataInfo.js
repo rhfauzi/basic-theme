@@ -16,7 +16,9 @@ const dataInfo =  {
       return { ...state, fetching: true };
     },
     getData_Failed(state, payload) {
-      return { ...state, fetching: false, error: payload, fetched: true };
+      console.log('state', state)
+      console.log('payload', payload)
+      return { ...state, fetching: false, error: payload, fetched: true }
     },
     SET_PRODUCT_LIST: (state, payload) => ({
       ...state,
@@ -32,8 +34,9 @@ const dataInfo =  {
         console.log("response", response);
         // dispatch.dataInfo.manageTeamsList(response);
       } catch (error) {
-        console.error("error", error);
+        console.error("error 333333333333333333333", error);
         this.getData_Failed(error);
+        return false
       }
     },
   }),

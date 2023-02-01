@@ -38,7 +38,7 @@ const ModalCommon = (props) => {
   return (
     <div className={"click-modal-container"}>
       <Modal
-        zIndex={9999}
+        zIndex={99}
         closable={false}
         centered
         width={500}
@@ -93,7 +93,7 @@ const ModalCommon = (props) => {
 
         {secondaryButton ? (
           <Button
-            id="BackToCategory"
+            id="buttonSecoundary"
             style={{
               marginTop: errorMessage || description !== null ? 10 : 80,
               color: "#780000",
