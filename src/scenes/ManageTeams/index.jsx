@@ -13,154 +13,149 @@ import ModalCommon from "../../components/common/ModalCommon";
 import General from "../../common/Utils/General";
 import HelperFunction from "../../helper/HelperFunction";
 
-const loading = false;
-console.log("1111111111111 Team");
-
 const Team = () => {
-  console.log("2222222222222 Team");
-  // const theme = useTheme();
-  // const colors = tokens(theme.palette.mode);
-  // const dispatch = useDispatch();
-  // const [modalData, setModalData] = useState({
-  //   isModalOpen: false,
-  //   errorCode: "",
-  //   errorTitle: "",
-  //   errorMessage: "",
-  //   mainButton: {
-  //     title: "OK",
-  //   },
-  //   secondaryButton: null,
-  //   sourceSystem: "",
-  //   image: "error",
-  // });
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const dispatch = useDispatch();
+  const [modalData, setModalData] = useState({
+    isModalOpen: false,
+    errorCode: "",
+    errorTitle: "",
+    errorMessage: "",
+    mainButton: {
+      title: "OK",
+    },
+    secondaryButton: null,
+    sourceSystem: "",
+    image: "error",
+  });
 
-  // const { data, error } = useSelector((state) => state.dataInfo);
-  //
+  const { data, error } = useSelector((state) => state.dataInfo);
+
   useEffect(() => {
-    console.log("44444444444444 Team useEffect 0");
-    // dispatch.dataInfo.getManageTeams();
-    // }, [dispatch.dataInfo]);
-  }, []);
+    dispatch.dataInfo.getManageTeams();
+    //eslint-disable-next-line
+  }, [dispatch.dataInfo]);
 
-  // useEffect(() => {
-  //   console.log("useEffect 1");
-  //   if (error.code !== undefined) {
-  //     setModalData({
-  //       ...modalData,
-  //       isModalOpen: true,
-  //       errorCode: error.code,
-  //       errorTitle: error.message,
-  //       errorMessage: General.error.title.ERROR_CODE_GENERAL_NETWORK,
-  //       secondaryButton: {
-  //         title: "Try Again",
-  //         onClick: closeModalBackTo(),
-  //       },
-  //     });
-  //   }
-  //   // eslint-disable-next-line
-  // }, [error.code]);
+  useEffect(() => {
+    if (error.code !== undefined) {
+      setModalData({
+        ...modalData,
+        isModalOpen: true,
+        errorCode: error.code,
+        errorTitle: error.message,
+        errorMessage: General.error.title.ERROR_CODE_GENERAL_NETWORK,
+        secondaryButton: {
+          title: "Try Again",
+          onClick: closeModalBackTo(),
+        },
+      });
+    }
+    //eslint-disable-next-line
+  }, [error.code]);
 
-  // const closeModalBackTo = useCallback(
-  //   (type, exact = false) =>
-  //     () => {
-  //       setModalData({
-  //         ...modalData,
-  //         isModalOpen: false,
-  //       });
+  const closeModalBackTo = useCallback(
+    (type, exact = false) =>
+      () => {
+        setModalData({
+          ...modalData,
+          isModalOpen: false,
+        });
 
-  //       switch (type) {
-  //         case "login":
-  //           setTimeout(() => {
-  //             window.location = "/login";
-  //           }, 500);
-  //           break;
+        switch (type) {
+          case "login":
+            setTimeout(() => {
+              window.location = "/login";
+            }, 500);
+            break;
 
-  //         default:
-  //           window.location.reload();
-  //       }
-  //     },
-  //   [modalData]
-  // );
+          default:
+            window.location.reload();
+        }
+      },
+    [modalData]
+  );
 
-  // const columns = [
-  //   { field: "id", headerName: "ID" },
-  //   {
-  //     field: "name",
-  //     headerName: "Name",
-  //     flex: 1,
-  //     cellClassName: "name-column--cell",
-  //   },
-  //   {
-  //     field: "age",
-  //     headerName: "Age",
-  //     type: "number",
-  //     headerAlign: "left",
-  //     align: "left",
-  //   },
-  //   {
-  //     field: "phone",
-  //     headerName: "Phone Number",
-  //     flex: 1,
-  //   },
-  //   {
-  //     field: "email",
-  //     headerName: "Email",
-  //     flex: 1,
-  //   },
-  //   {
-  //     field: "accessLevel",
-  //     headerName: "Access Level",
-  //     flex: 1,
-  //     renderCell: ({ row: { access } }) => {
-  //       return (
-  //         <Box
-  //           width="60%"
-  //           m="0 auto"
-  //           p="5px"
-  //           display="flex"
-  //           justifyContent="center"
-  //           backgroundColor={
-  //             access === "admin"
-  //               ? colors.greenAccent[600]
-  //               : access === "manager"
-  //               ? colors.greenAccent[700]
-  //               : colors.greenAccent[700]
-  //           }
-  //           borderRadius="4px"
-  //         >
-  //           {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-  //           {access === "manager" && <SecurityOutlinedIcon />}
-  //           {access === "user" && <LockOpenOutlinedIcon />}
-  //           <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-  //             {access}
-  //           </Typography>
-  //         </Box>
-  //       );
-  //     },
-  //   },
-  // ];
+  const columns = [
+    { field: "id", headerName: "ID" },
+    {
+      field: "name",
+      headerName: "Name",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
+    {
+      field: "age",
+      headerName: "Age",
+      type: "number",
+      headerAlign: "left",
+      align: "left",
+    },
+    {
+      field: "phone",
+      headerName: "Phone Number",
+      flex: 1,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+    },
+    {
+      field: "accessLevel",
+      headerName: "Access Level",
+      flex: 1,
+      renderCell: ({ row: { access } }) => {
+        return (
+          <Box
+            width="60%"
+            m="0 auto"
+            p="5px"
+            display="flex"
+            justifyContent="center"
+            backgroundColor={
+              access === "admin"
+                ? colors.greenAccent[600]
+                : access === "manager"
+                ? colors.greenAccent[700]
+                : colors.greenAccent[700]
+            }
+            borderRadius="4px"
+          >
+            {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
+            {access === "manager" && <SecurityOutlinedIcon />}
+            {access === "user" && <LockOpenOutlinedIcon />}
+            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
+              {access}
+            </Typography>
+          </Box>
+        );
+      },
+    },
+  ];
+
+  console.log("data.manageTeamsList", data.manageTeamsList);
 
   return (
     <Box m="20px">
-      {console.log("33333333333333333 Team")}
       <Header title="TEAM" subtitle="Managing the Team Members" />
 
-      {/* <Button
+      <Button
         type="primary"
         onClick={() => setModalData({ ...modalData, isModalOpen: true })}
       >
         Open Modal
-      </Button> */}
+      </Button>
 
-      {/* <Box m="40px 0 0 0" height="75vh" sx={HelperFunction.TableStyles(colors)}>
+      <Box m="40px 0 0 0" height="75vh" sx={HelperFunction.TableStyles(colors)}>
         <DataGrid
           checkboxSelection
           rows={data.manageTeamsList}
           columns={columns}
         />
-      </Box> */}
+      </Box>
 
-      {/* <ModalCommon
+      <ModalCommon
         title={modalData.errorTitle}
         errorMessage={
           modalData.sourceSystem
@@ -176,7 +171,7 @@ const Team = () => {
         }}
         secondaryButton={modalData.secondaryButton}
         handleCancel={() => setModalData({ ...modalData, isModalOpen: false })}
-      /> */}
+      />
     </Box>
   );
 };

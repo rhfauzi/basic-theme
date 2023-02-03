@@ -31,7 +31,7 @@ const dataInfo = {
           requestBody
         );
         console.log("response getManageTeams", response);
-        // this.getData_Success(response);
+        this.getData_Success(response);
         // dispatch.dataInfo.manageTeamsList(response);
       } catch (error) {
         console.error("error 333333333333333333333", error);

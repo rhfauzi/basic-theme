@@ -9,9 +9,7 @@ import ModalCommon from "../../components/common/ModalCommon";
 import General from "../../common/Utils/General";
 import HelperFunction from "../../helper/HelperFunction";
 
-console.log("1111111111111111111 Contacts");
 const Contacts = () => {
-  console.log("222222222222222222 Contacts");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const dispatch = useDispatch();
@@ -32,7 +30,6 @@ const Contacts = () => {
   console.log("dataInfo", data);
 
   useEffect(() => {
-    console.log("444444444444444444444 Contacts");
     dispatch.dataInfo.getContactInformation({});
   }, [dispatch.dataInfo]);
 
@@ -121,7 +118,6 @@ const Contacts = () => {
 
   return (
     <Box m="20px">
-      {console.log("3333333333333333333 Contacts")}
       <Header
         title="CONTACTS"
         subtitle="List of Contacts for Future Reference"
