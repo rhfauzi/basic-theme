@@ -26,8 +26,8 @@ const getContactInformationService = (requestBody) => {
   });
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+const dataInfo = {
   getManageTeamsService,
   getContactInformationService,
 };
+export default dataInfo;

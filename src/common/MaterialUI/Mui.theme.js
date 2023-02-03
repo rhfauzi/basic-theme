@@ -1,6 +1,7 @@
-import { createMuiTheme } from "@mui/material";
+// import { createMuiTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 
-export default createMuiTheme({
+export default createTheme({
   palette: {
     primary: {
       500: "#780000",

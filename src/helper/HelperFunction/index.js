@@ -30,8 +30,8 @@ const Tes = (colors) => {
   return true;
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+const HelperFunction = {
   TableStyles,
   Tes,
 };
+export default HelperFunction;

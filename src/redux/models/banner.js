@@ -1,7 +1,6 @@
 import bannerService from "../services/banner";
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+const banner = {
   state: {
     bannerData: [],
     fetching: false,
@@ -33,3 +32,5 @@ export default {
     },
   },
 };
+
+export default banner;

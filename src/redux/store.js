@@ -5,11 +5,12 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 import { createBrowserHistory } from "history";
 
 import banner from "./models/banner";
-import dataInfo from "./models/dataInfo";
 
 export const history = createBrowserHistory({
-  basename: `/admin`,
+  basename: `/`,
 });
+
+const routingMiddleware = routerMiddleware(history);
 
 const persistConfig = {
   key: "root",
@@ -17,12 +18,9 @@ const persistConfig = {
   blacklist: ["otp"],
 };
 
-const routingMiddleware = routerMiddleware(history);
-
 const store = init({
   models: {
     banner,
-    dataInfo,
   },
   redux: {
     reducers: {

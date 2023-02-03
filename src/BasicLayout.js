@@ -21,6 +21,20 @@ function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
 
+  function ScrollToTop({ history, children }) {
+    useEffect(() => {
+      const unlisten = history.listen(() => {
+        const main = document.querySelector("#inner-layout-content");
+        main.scrollTo(0, 0);
+      });
+      return () => {
+        unlisten();
+      };
+    }, []);
+
+    return <Fragment>{children}</Fragment>;
+  }
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -29,18 +43,19 @@ function App() {
           <Sidebar isSidebar={isSidebar} />
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
+            <ManageTeams />
             <Switch>
               <Route exact path="/" element={<Dashboard />} />
-              <Route path="/teams" element={<ManageTeams />} />
-              <Route path="/contacts" element={<ContactsInformation />} />
-              <Route path="/invoices" element={<Invoices />} />
-              <Route path="/form" element={<Form />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/geography" element={<Geography />} />
+              <Route exact path="/teams" element={<ManageTeams />} />
+              <Route exact path="/contacts" element={<ContactsInformation />} />
+              <Route exact path="/invoices" element={<Invoices />} />
+              <Route exact path="/form" element={<Form />} />
+              <Route exact path="/bar" element={<Bar />} />
+              <Route exact path="/pie" element={<Pie />} />
+              <Route exact path="/line" element={<Line />} />
+              <Route exact path="/faq" element={<FAQ />} />
+              <Route exact path="/calendar" element={<Calendar />} />
+              <Route exact path="/geography" element={<Geography />} />
             </Switch>
           </main>
         </div>
