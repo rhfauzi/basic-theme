@@ -4,13 +4,14 @@ import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 import { tokens } from "../../theme";
-import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
 import ModalCommon from "../../components/common/ModalCommon";
 import General from "../../common/Utils/General";
 import HelperFunction from "../../helper/HelperFunction";
 
+console.log("1111111111111111111 Contacts");
 const Contacts = () => {
+  console.log("222222222222222222 Contacts");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const dispatch = useDispatch();
@@ -27,17 +28,17 @@ const Contacts = () => {
     image: "error",
   });
 
-  const dataInfo = useSelector((state) => state.dataInfo);
-  console.log("dataInfo", dataInfo);
+  const { data, error } = useSelector((state) => state.dataInfo);
+  console.log("dataInfo", data);
 
   useEffect(() => {
-    dispatch.dataInfo.getManageTeams({});
+    console.log("444444444444444444444 Contacts");
+    dispatch.dataInfo.getContactInformation({});
   }, [dispatch.dataInfo]);
 
   useEffect(() => {
     console.log("useEffect 1");
-    if (dataInfo.error.code !== undefined) {
-      const error = dataInfo.error;
+    if (error.code !== undefined) {
       setModalData({
         ...modalData,
         isModalOpen: true,
@@ -51,7 +52,7 @@ const Contacts = () => {
       });
     }
     // eslint-disable-next-line
-  }, [dataInfo.error.code]);
+  }, [error.code]);
 
   const closeModalBackTo = useCallback(
     (type, exact = false) =>
@@ -120,13 +121,14 @@ const Contacts = () => {
 
   return (
     <Box m="20px">
+      {console.log("3333333333333333333 Contacts")}
       <Header
         title="CONTACTS"
         subtitle="List of Contacts for Future Reference"
       />
       <Box m="40px 0 0 0" height="75vh" sx={HelperFunction.TableStyles(colors)}>
         <DataGrid
-          rows={mockDataContacts}
+          rows={data.contactInformation}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
         />
