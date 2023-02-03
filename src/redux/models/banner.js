@@ -24,7 +24,7 @@ export default {
       try {
         this.getBanner_Request();
         const response = await bannerService.getBanner(requestBody);
-        // console.log('response', response)
+        console.log("response", response);
         this.getBanner_Succeed(response);
       } catch (error) {
         console.error("error", error);

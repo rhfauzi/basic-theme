@@ -1,29 +1,26 @@
 import dataInfoService from "../services/dataInfo";
 
-const dataInfo =  {
+const dataInfo = {
   state: {
-    bannerData: [],
     fetching: false,
     fetched: false,
     manageTeamsList: [],
+    contactInformation: [],
     error: {},
   },
   reducers: {
-    getBanner_Succeed(state, payload) {
-      return { ...state, bannerData: payload, fetching: false, fetched: true };
-    },
-    getData_Request(state, payload) {
-      return { ...state, fetching: true };
-    },
     getData_Failed(state, payload) {
-      console.log('state', state)
-      console.log('payload', payload)
-      return { ...state, fetching: false, error: payload, fetched: true }
+      return { ...state, fetching: false, error: payload, fetched: true };
     },
-    SET_PRODUCT_LIST: (state, payload) => ({
-      ...state,
-      manageTeamsList: payload,
-    }),
+    getData_ManageTeams(state, payload) {
+      return {
+        ...state,
+        manageTeamsList: payload,
+        fetching: false,
+        fetched: true,
+        error: {},
+      };
+    },
   },
   effects: (dispatch) => ({
     async getManageTeams(requestBody = {}) {
@@ -32,11 +29,12 @@ const dataInfo =  {
           requestBody
         );
         console.log("response", response);
+        this.getData_ManageTeams(response);
         // dispatch.dataInfo.manageTeamsList(response);
       } catch (error) {
         console.error("error 333333333333333333333", error);
         this.getData_Failed(error);
-        return false
+        return false;
       }
     },
   }),

@@ -1,7 +1,7 @@
 {
   "error": {
     "title": {
-      "ERROR_CODE_GENERAL_NETWORK": "Connection time-out, unable to load data",
+      "ERROR_CODE_GENERAL_NETWORK": "Connection time-out, unable to load data.\nPlease Try Again",
       "ERROR_CODE_GENERAL_NOT_PROCESSED": "Your request cannot be processed"
     },
     "code": {
